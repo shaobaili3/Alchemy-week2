@@ -1,4 +1,4 @@
-// const  qs = require('qs');
+const  qs = require('qs');
 
 async function connect() {
   /** MetaMask injects a global API into websites visited by its users at `window.ethereum`. This API allows websites to request users' Ethereum accounts, read data from blockchains the user is connected to, and suggest that the user sign messages and transactions. The presence of the provider object indicates an Ethereum user. Read more: https://ethereum.stackexchange.com/a/68294/85979**/
