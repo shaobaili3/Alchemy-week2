@@ -102,6 +102,23 @@ async function getPrice() {
     document.getElementById("from_amount").value *
       10 ** currentTrade.from.decimals
   );
+
+  const params = {
+      sellToken: currentTrade.from.address,
+      buyToken: currentTrade.to.address,
+      sellAmount: amount,
+    }
+    // Fetch the swap price.
+    const response = await fetch(
+      `https://api.0x.org/swap/v1/price?${qs.stringify(params)}`
+      );
+
+    // Await and parse the JSON response 
+    swapPriceJSON = await  response.json();
+    console.log("Price: ", swapPriceJSON);
+    // Use the returned values to populate the buy Amount and the estimated gas in the UI
+    document.getElementById("to_amount").value = swapPriceJSON.buyAmount / (10 ** currentTrade.to.decimals);
+    document.getElementById("gas_estimate").innerHTML = swapPriceJSON.estimatedGas;    
 }
 
 async function init() {
